@@ -12,6 +12,12 @@
 (function () {
     "use strict";
 
+    var firstName
+    var lastName
+    var email
+    var contactNumber
+    var yourMessage
+
     /**
      * This function uses the document.title to switch javascript function
      * when the page switches.
@@ -92,24 +98,6 @@
                 clearInterval(myTimer)
             }
         }, 1000)
-
-        // window.alert("NEVER use alerts. they are annoying")
-
-        // if (window.confirm('Are you sure you want to give away senstive info?')) {
-
-        //     console.log('InnerWidth: ' + window.innerWidth)
-        //     console.log('InnerHeight: ' + window.innerHeight)
-
-        //     console.log('OuterWidth: ' + window.outerWidth)
-        //     console.log('OuterHeight: ' + window.outerHeight)
-
-        //     console.log('Location: ' + window.location)
-
-        //     var name = window.prompt('Enter your name: ')
-        //     console.log('your name is ' + name)
-        // }
-
-
     }
 
     /**
@@ -119,11 +107,17 @@
      * @returns {void}
      */
     function Contact() {
-        var contactNumber = document.getElementById('contactNumber')
+        // create a reference for your form
+        var contactForm = document.getElementById('contactForm')
 
-        contactNumber.addEventListener('blur', function () {
-            console.log(contactNumber.value.length)
-        })
+        firstName = document.getElementById('firstName')
+        lastName = document.getElementById('lastName')
+        email = document.getElementById('email')
+        yourMessage = document.getElementById('yourMessage')
+        contactNumber = document.getElementById('contactNumber')
+
+        contactForm.addEventListener('submit', onFormSubmit)
+
     }
 
     /**
@@ -135,6 +129,54 @@
     function Projects() {
         InitialText();
 
+    }
+
+    // CALLBACK (EVENT HANDLER) functions +++++++++++++++++++++++++++++++
+
+    /**
+     * callback / event handler for the contactForm submit event
+     * 
+     * @method onFormSubmit
+     * @returns {void}
+     */
+    var onFormSubmit = function (event) {
+        console.info('entered onFormSubmit function')
+
+        // stop the form from clearing and trying to submit
+        event.preventDefault()
+
+        // display the form values to the console
+        displayFormValues()
+
+        // resets the form
+        contactForm.reset()
+    }
+    /**
+     * displays form values
+     * 
+     * @method displayFormValues
+     * @returns {void}
+     */
+    function displayFormValues() {
+        var column = document.getElementById('column')
+        var formValues = document.createElement('div')
+        formValues.setAttribute('id', 'formValues')
+        var formValuesString = ''
+        formValuesString += 'First Name: ' + firstName.value + '<br>'
+        formValuesString += 'Last Name: ' + lastName.value + '<br>'
+        formValuesString += 'Email: ' + email.value + '<br>'
+        formValuesString += 'Contact Number: ' + contactNumber.value + '<br>'
+        formValuesString += 'Your Message: ' + yourMessage.value
+
+        formValues.innerHTML = formValuesString
+
+        if (document.getElementById('formValues')) {
+            var formValuesDiv = document.getElementById('formValues')
+            formValuesDiv.innerHTML = formValuesString
+        }
+        else {
+            column.appendChild(formValues)
+        }
     }
 
     window.addEventListener("load", PageSwitcher);

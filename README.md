@@ -1,4 +1,3 @@
-# COMP125-Lesson6
+# COMP125-Lesson7
 
-## A project to demonstrate Enhancing and Validating Forms
-## for COMP125 - Client-Side Web Development  @ Centennial
+## This is a review lesson for the mid-term test
